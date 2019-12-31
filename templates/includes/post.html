@@ -1,0 +1,57 @@
+{{ define "content" }}
+<div class="body-content">
+    <div class="row">
+        <div class="offset-lg-3 col-lg-6">
+            <h1 class="text-center">{{.post.CreatedBy}}'s Photo</h1>
+            <hr />
+        </div>
+    </div>
+    <div class="row">
+        <div class="offset-lg-3 col-lg-6">
+            <img src="../img/{{.post.CreatedBy}}/{{.post.ImgName}}" />
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="offset-lg-3 col-lg-6">
+            <hr />
+            <h6>{{.post.Caption}}</h6>   
+            <hr />     
+        </div>
+    </div>
+    {{ if .post.Comments }}
+        {{ $length := len .post.Comments }} {{ if gt $length 0 }}
+        {{ range $val := .post.Comments }}
+        <div class="row">
+            <div class="offset-lg-3 col-lg-6">
+                <p><b>{{$val.CreatedBy}} - </b>{{$val.Content}}</p>
+            </div>
+        </div>
+        {{end}}
+        {{end}}
+    {{else}}  
+    <br />
+    <div class="row text-center">
+            <div class="offset-lg-3 col-lg-6">
+                <p>No comments yet!</p>
+            </div>
+        </div>  
+    {{end}}
+    {{ if .user }}
+    <hr />
+    <div class="row text-center">
+        <div class="offset-lg-4 col-lg-4">
+            <form action="/comment" method="post">
+                <div class="form-group">
+                    <textarea class="form-control" name="comment" placeholder="Leave a comment!"></textarea>
+                </div>
+                <input type="hidden" name="postID" value="{{.post.PostID}}" />
+                {{if .error }}
+                <p><small class="error">{{.error}}</small></p>
+                {{ end }}
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>     
+    {{ end }}
+</div>
+{{ end }}

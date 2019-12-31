@@ -1,0 +1,24 @@
+{{ define "content" }}
+<div class="body-content">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h1>{{ .body }}</h1>
+            {{ if not .user }}
+            <a href="/register">Click Here to Get Started!</a>
+            {{ end }}          
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-lg-4">
+            <img src="img/breathtaking.jpg" />
+        </div>
+        <div class="col-lg-4">
+            <img src="img/rocksandsky.jpeg" />
+        </div>
+        <div class="col-lg-4">
+            <img src="img/rustichouse.jpg" />
+        </div>
+    </div>
+</div>
+{{ end }}

@@ -1,0 +1,25 @@
+{{ define "content" }}
+<div class="body-content">
+    <div class="row">
+        <div class="offset-lg-5 col-lg-2 text-center">
+            <h3>Log In Below!</h3>
+            <hr />
+            <form action="/signon" method="post">
+                <div class="form-group">
+                    <input class="form-control" type="text" name="username" placeholder="Username" />
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="password" name="password" placeholder="Password" />
+                </div>
+                {{ if .error }}
+                <p><small class="error">{{.error}}</small><p>
+                {{ end }}
+                <button type="submit" class="btn btn-primary">Sign In</button>
+                <br />
+                <a href="/register"><small>Don't have an account? Click Here!</small></a>
+            </form>
+        </div>
+    </div>
+</div>
+
+{{ end }}

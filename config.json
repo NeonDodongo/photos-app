@@ -1,0 +1,10 @@
+{
+    "port":"3000",
+    "timeout":60,
+    "mongo": {
+      "url" : "mongodb+srv://neonorca:nakedgyp13@testcluster-i7bzt.gcp.mongodb.net/admin?retryWrites=true&w=majority",
+      "database": "Photo-App",
+      "postCollection": "post",
+      "userCollection": "user"
+    }
+  }

@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>{{ .title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background: #184261;
+        }
+        img {
+            width: 100%;
+            height: 100%;
+        }
+        .navbar-custom {
+            background-color: #1c2321;
+        }
+        .navbar-custom .navbar-brand {
+            color: #3f7196;
+        }
+        .navbar-custom .navbar-text {
+            color: cyan;
+        }
+        .navbar-custom .navbar-nav .nav-link {
+            color: #7d98a1;
+        }
+        .navbar-toggler {
+            border-color: white;
+        }
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(9,55,244, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+        }
+        .body-content {
+            margin-top: 1%;
+            background-color: #fbfefb;
+            padding: 12px;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom navbar-custom">
+        <a class="navbar-brand" href="/">Photo App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon">   
+                <i class="fas fa-bars" style="color:#fff; font-size:28px;"></i>
+            </span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                {{ if .user }}
+                <li class="nav-item">
+                    <a class="nav-link" href="/upload">Upload</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/signoff">Sign Off</a>
+                </li>
+                {{ else }}
+                <li class="nav-item">
+                    <a class="nav-link" href="/register">Create an Account<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/signon">Sign On</a>
+                </li>
+                {{ end }}
+            </ul>
+            {{ if .user }}
+            <a href="/profile/{{.user.Username}}"><span class="navbar-text">{{ .user.Username }}</span></a>
+            {{ end }}
+        </div>
+    </nav>
+    <div class="container-fluid">
+        {{ template "content" . }}
+    </div>
+</body>
+</html>

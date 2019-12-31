@@ -1,0 +1,28 @@
+{{ define "content" }}
+<div class="body-content">
+    <div class="row">
+        <div class="offset-sm-4 col-sm-4 text-center">
+            <h1>{{.owner.Username}}'s Photos</h1>
+            <hr />
+        </div>
+    </div>
+    {{ if .owner.Posts }}
+        {{ $length := len .owner.Posts }} {{ if gt $length 0 }} 
+            {{$username := .owner.Username}} {{ range $val := .owner.Posts }}
+            <div class="row" style="padding:15px;">
+                <div class="offset-lg-4 col-lg-4 text-center">
+                    <!--a href="/view/{{$val.PostID}}"><img src="../img/{{$username}}/{{$val.ImgName}}" /></a-->
+                    <a href="/view/{{$val.PostID}}"><img src="{{$val.ImgLocation}}" /></a>
+                </div>
+            </div>
+            {{ end }}
+        {{ end }}
+    {{ else }}
+    <div class="row">
+        <div class="offset-sm-4 col-sm-4 text-center">
+            <h3>{{.owner.Username}} has no photos yet!</h3>
+        </div>
+    </div>
+    {{ end }}
+</div>
+{{ end }}
