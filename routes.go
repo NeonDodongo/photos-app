@@ -328,7 +328,18 @@ func uploadForm(c *gin.Context) {
 func (con appController) uploadPhoto(c *gin.Context) {
 
 	h := getUserSession(c)
-	u := h[userKey].(models.User)
+
+	if h[userKey] == nil {
+		c.Redirect(302, "/signon")
+		return
+	}
+	userSession := h[userKey].(models.User)
+
+	u, err := con.Mongo.FindUserByUsername(userSession.Username)
+	if err != nil {
+		c.Redirect(302, "/error")
+		return
+	}
 
 	file, err := c.FormFile("photo")
 	if err != nil {
@@ -396,6 +407,10 @@ func (con appController) uploadPhoto(c *gin.Context) {
 	post.ImgLocation = out.Location
 
 	u.Posts = append(u.Posts, post)
+
+	h[userKey] = u
+
+	log.Printf("User Posts: %d", len(u.Posts))
 
 	con.Mongo.Upsert(post)
 	con.Mongo.Upsert(u)
